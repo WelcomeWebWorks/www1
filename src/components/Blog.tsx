@@ -1,3 +1,4 @@
+export default function Blog() {
   const posts = [
     {
       title: 'Best Practices for Kubernetes Security',
