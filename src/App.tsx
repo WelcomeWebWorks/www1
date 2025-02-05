@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { User, FileText, Briefcase, BookOpen, Phone, PenTool as Tool, Mail, MapPin, Download, Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
 import About from './components/About';
 import Resume from './components/Resume';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Tools() {
   const tools = {
     'Cloud Platforms': ['AWS', 'GCP'],

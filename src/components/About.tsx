@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { Code2, Cloud, Terminal, Database } from 'lucide-react';
 
 export default function About() {
@@ -34,7 +34,7 @@ export default function About() {
     }, 2000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, );
 
   return (
     <div className="space-y-8">
