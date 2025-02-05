@@ -109,7 +109,7 @@ function App() {
               <img
                 src="https://res.cloudinary.com/dmleutllp/image/upload/v1738698147/www1_img1_rfinrl.jpg"
                 alt="Profile"
-                className="w-24 h-24 rounded-full mb-4"
+                className="w-28 h-28 rounded-full mb-4"
               />
               <div className="space-y-2">
                 <h1 className="text-lg font-bold">SAI SAMPATH C PUSULURI</h1>
