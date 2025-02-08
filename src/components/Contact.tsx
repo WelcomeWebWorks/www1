@@ -1,92 +1,125 @@
+import { motion } from 'framer-motion';
+import { pageTransition, itemTransition } from './AnimatedSection';
+
 export default function Contact() {
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      <h2 className="text-3xl font-bold">Contact Me</h2>
-      <p>
-        Open For Opportunities:{" "}
-        <span style={{ color: "rgb(0, 255, 213)", fontWeight: "bold" }}>YES</span>
-      </p>
+    <motion.div
+      variants={pageTransition}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
+      <div className="space-y-2">
+        <h2 className="text-4xl font-bold text-white">Contact me</h2>
+        <div className="w-12 h-1 rounded-full" 
+          style={{ backgroundImage: "linear-gradient(142.17deg, #3086ff 6.66%, #304cfd 91.48%)" }}>
+        </div>
+      </div>
 
-      {/* Contact Form */}
-      <form action="https://formsubmit.co/tarakgopi100@gmail.com" method="POST" className="space-y-4">
-        <input type="hidden" name="_subject" value="New Contact Form Submission" />
-        <input type="hidden" name="_captcha" value="false" />
+      <motion.div variants={itemTransition} className="mt-8">
+        <p className="text-gray-400 text-lg">
+          Open for opportunities: <span className="text-[#3086ff] font-semibold">Yes</span>
+        </p>
+      </motion.div>
 
-        {/* Name Field */}
-        <div>
-          <label htmlFor="name" className="block text-lg font-medium text-white mb-2">
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            placeholder="Enter your name"
-            className="mt-1 block w-full rounded-lg border-2 border-gray-300 bg-white p-3 text-lg shadow-md 
-                      focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 transition duration-300 
-                      ease-in-out transform hover:scale-105 focus:scale-105 placeholder:text-gray-700 
-                      focus:placeholder:text-transparent"
-            onInput={(e) => {
-              const input = e.target as HTMLInputElement;
-              input.style.color = 'black';
-            }}
-          />
+      <motion.form 
+        variants={itemTransition}
+        className="mt-8 space-y-6"
+        action="https://formsubmit.co/saisampathc2@gmail.com" 
+        method="POST"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <motion.div 
+            variants={itemTransition}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
+              className="w-full px-4 py-3 rounded-lg bg-[#2e2f36] border border-[#2e2f36] 
+                       text-[#aeb0b8] placeholder-[#aeb0b8]/70 focus:outline-none focus:border-[#3086ff]
+                       transition-all"
+              style={{
+                backgroundColor: "#2e2f36",
+                borderColor: "#2e2f36",
+                color: "#aeb0b8"
+              }}
+            />
+          </motion.div>
+
+          <motion.div 
+            variants={itemTransition}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+              className="w-full px-4 py-3 rounded-lg bg-[#2e2f36] border border-[#2e2f36] 
+                       text-[#aeb0b8] placeholder-[#aeb0b8]/70 focus:outline-none focus:border-[#3086ff]
+                       transition-all"
+              style={{
+                backgroundColor: "#2e2f36",
+                borderColor: "#2e2f36",
+                color: "#aeb0b8"
+              }}
+            />
+          </motion.div>
         </div>
 
-        {/* Email Field */}
-        <div>
-          <label htmlFor="email" className="block text-lg text-white font-medium mb-2">
-            Email Address
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            placeholder="Enter your email"
-            className="mt-1 block w-full rounded-lg border-2 border-gray-300 bg-white p-3 text-lg shadow-md 
-                      focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 transition duration-300 
-                      ease-in-out transform hover:scale-105 focus:scale-105 placeholder:text-gray-700 
-                      focus:placeholder:text-transparent"
-            onInput={(e) => {
-              const input = e.target as HTMLInputElement;
-              input.style.color = 'black';
-            }}
-          />
-        </div>
-
-        {/* Message Field */}
-        <div>
-          <label htmlFor="message" className="block text-lg text-white font-medium mb-2">
-            Message
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            required
-            rows={4}
-            placeholder="Enter your message"
-            className="mt-1 block w-full rounded-lg border-2 border-gray-300 bg-white p-3 text-lg shadow-md 
-                      focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 transition duration-300 
-                      ease-in-out transform hover:scale-105 focus:scale-105 placeholder:text-gray-700 
-                      focus:placeholder:text-transparent"
-            onInput={(e) => {
-              const textarea = e.target as HTMLTextAreaElement;
-              textarea.style.color = 'black';
-            }}
-          />
-        </div>
-
-        {/* Submit Button with rgb(0, 255, 213) */}
-        <button
-          type="submit"
-          className="w-full text-black py-2 px-4 rounded-md hover:bg-[#00ffd5] focus:outline-none focus:ring-2 focus:ring-[#00ffd5] focus:ring-offset-2 transition duration-300"
-          style={{ backgroundColor: "rgb(0, 255, 213)", fontWeight: "bold" }}
+        <motion.div 
+          variants={itemTransition}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.99 }}
         >
-          Send Message
-        </button>
-      </form>
-    </div>
+          <textarea
+            name="message"
+            rows={6}
+            placeholder="Your Message"
+            required
+            className="w-full px-4 py-3 rounded-lg bg-[#2e2f36] border border-[#2e2f36] 
+                     text-[#aeb0b8] placeholder-[#aeb0b8]/70 focus:outline-none focus:border-[#3086ff]
+                     transition-all resize-none"
+            style={{
+              backgroundColor: "#2e2f36",
+              borderColor: "#2e2f36",
+              color: "#aeb0b8"
+            }}
+          />
+        </motion.div>
+
+        <motion.button
+          variants={itemTransition}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          type="submit"
+          className="px-8 py-3 rounded-full text-white font-medium 
+                   hover:opacity-90 transition-all duration-300 flex items-center gap-2"
+          style={{ backgroundImage: "linear-gradient(142.17deg, #3086ff 6.66%, #304cfd 91.48%)" }}
+        >
+          <span>Submit</span>
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="w-5 h-5"
+          >
+            <path d="M22 2L11 13"></path>
+            <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+          </svg>
+        </motion.button>
+      </motion.form>
+    </motion.div>
   );
 }
