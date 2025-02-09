@@ -1,31 +1,51 @@
+import { motion } from 'framer-motion';
+import { pageTransition, itemTransition } from './AnimatedSection';
+
 export default function Portfolio() {
   const projects = [
     {
-      title: 'Cloud Infrastructure Automation',
-      description: 'Automated AWS infrastructure using Terraform and Ansible.',
-      technologies: ['AWS', 'Terraform', 'Ansible'],
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+      title: 'Introduction to Cloud Computing',
+      description: 'Introduction to Cloud Computing',
+      technologies: ['IBM',],
+      image: 'https://res.cloudinary.com/dvzsmoule/image/upload/v1739010656/sai_certificate_cd8w0g.png'
     },
+
     {
-      title: 'Kubernetes Cluster Management',
-      description: 'Implemented and managed production Kubernetes clusters.',
-      technologies: ['Kubernetes', 'Docker', 'Helm'],
-      image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      title: 'CI/CD Pipeline Optimization',
-      description: 'Optimized deployment pipelines using GitHub Actions.',
-      technologies: ['GitHub Actions', 'Docker', 'Node.js'],
-      image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+      title: 'Cloud Essentials',
+      description: 'Cloud Essentials',
+      technologies: ['AWS',],
+      image: 'https://res.cloudinary.com/dvzsmoule/image/upload/v1739010683/sai_certificate_ch1lum.jpg'
     }
+
   ];
 
   return (
-    <div className="space-y-6">
-      <h3 className="text-3xl font-bold">Portfolio</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <motion.div
+      variants={pageTransition}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
+      <div className="space-y-2">
+        <h2 className="text-4xl font-bold text-white">Portfolio</h2>
+        <div className="w-12 h-1 rounded-full" 
+          style={{ backgroundImage: "linear-gradient(142.17deg, #3086ff 6.66%, #304cfd 91.48%)" }}>
+        </div>
+      </div>
+
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8"
+      >
         {projects.map((project, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-sm overflow-hidden">
+          <motion.div
+            key={index}
+            variants={itemTransition}
+            whileHover={{ 
+              scale: 1.02,
+              transition: { type: "spring", stiffness: 400, damping: 17 }
+            }}
+            className="bg-white rounded-lg shadow-sm overflow-hidden"
+          >
             <img
               src={project.image}
               alt={project.title}
@@ -38,16 +58,16 @@ export default function Portfolio() {
                 {project.technologies.map((tech, techIndex) => (
                   <span
                     key={techIndex}
-                    className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                    className="px-3 py-1 bg-[#3086ff] text-white rounded-full text-sm"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

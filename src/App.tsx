@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { User, FileText, Briefcase, BookOpen, Phone, PenTool as Tool, Mail, MapPin, Download, Menu, X, Github, Linkedin, Twitter } from 'lucide-react';
+import { User, FileText, Briefcase, BookOpen, Phone, PenTool as Tool, Mail, MapPin, Download, Menu, X, Github, Linkedin } from 'lucide-react';
 import About from './components/About';
 import Resume from './components/Resume';
 import Portfolio from './components/Portfolio';
 import Blog from './components/Blog';
 import Tools from './components/Tools';
 import Contact from './components/Contact';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const [activeTab, setActiveTab] = useState('about');
@@ -21,21 +22,23 @@ function App() {
   ];
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com' },
-    { icon: Linkedin, href: 'www.linkedin.com/in/saisampathc' },
-    { icon: Twitter, href: 'https://twitter.com' }
+    { icon: Github, href: 'https://github.com/yourusername' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/saisampathc' },
+    { icon: X, href: 'https://x.com/yourusername' },
+    { icon: Mail, href: 'mailto:saisampathc2@gmail.com' }
   ];
 
   const renderContent = () => {
-    switch (activeTab) {
-      case 'about': return <About />;
-      case 'resume': return <Resume />;
-      case 'portfolio': return <Portfolio />;
-      case 'blog': return <Blog />;
-      case 'tools': return <Tools />;
-      case 'contact': return <Contact />;
-      default: return <About />;
-    }
+    return (
+      <AnimatePresence mode="wait">
+        {activeTab === 'about' && <About key="about" />}
+        {activeTab === 'resume' && <Resume key="resume" />}
+        {activeTab === 'portfolio' && <Portfolio key="portfolio" />}
+        {activeTab === 'blog' && <Blog key="blog" />}
+        {activeTab === 'tools' && <Tools key="tools" />}
+        {activeTab === 'contact' && <Contact key="contact" />}
+      </AnimatePresence>
+    );
   };
 
   return (
@@ -46,8 +49,7 @@ function App() {
       <header className="sticky top-0 z-50 bg-[#22262a] shadow-lg">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center h-16 space-x-4">
-
-            {/* Desktop Navigation - Centered */}
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-4">
               {navItems.map(({ id, label }) => (
                 <button
@@ -55,16 +57,19 @@ function App() {
                   onClick={() => setActiveTab(id)}
                   className={`px-3 py-2 rounded-lg transition-all ${
                     activeTab === id 
-                      ? 'bg-[#00ffd5] text-black' 
+                      ? 'text-white' 
                       : 'text-gray-400 hover:text-white hover:bg-[#2a2e32]'
                   }`}
+                  style={activeTab === id ? {
+                    backgroundImage: "linear-gradient(142.17deg, #3086ff 6.66%, #304cfd 91.48%)"
+                  } : {}}
                 >
                   {label}
                 </button>
               ))}
             </nav>
 
-            {/* Mobile Menu Button - Centered */}
+            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 rounded-lg hover:bg-[#2a2e32]"
@@ -74,7 +79,7 @@ function App() {
           </div>
         </div>
 
-        {/* Mobile Navigation - Centered */}
+        {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-[#22262a] border-t border-[#2a2e32]">
             <div className="container mx-auto px-4 py-2">
@@ -87,9 +92,12 @@ function App() {
                   }}
                   className={`flex items-center gap-2 w-full px-4 py-2 rounded-lg ${
                     activeTab === id 
-                      ? 'bg-[#00ffd5] text-black' 
+                      ? 'text-white' 
                       : 'text-gray-400 hover:text-white hover:bg-[#2a2e32]'
-                  } justify-center`}
+                  } justify-center mb-2`}
+                  style={activeTab === id ? {
+                    backgroundImage: "linear-gradient(142.17deg, #3086ff 6.66%, #304cfd 91.48%)"
+                  } : {}}
                 >
                   <Icon size={20} />
                   {label}
@@ -101,67 +109,89 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-8">
-        {/* Profile Card */}
-        <div className="lg:w-64 flex-shrink-0">
-          <div className="card sticky top-24">
-            <div className="flex flex-col items-center text-center">
-              <img
-                src="https://res.cloudinary.com/dmleutllp/image/upload/v1738698147/www1_img1_rfinrl.jpg"
-                alt="Profile"
-                className="w-28 h-28 rounded-full mb-4"
-              />
-              <div className="space-y-2">
-                <h1 className="text-lg font-bold">SAI SAMPATH C PUSULURI</h1>
-                <p className="text-sm text-gray-400">DevOps | Cloud Engineer</p>
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                  <Phone size={14} />
-                  <span>+1 3312267566</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                  <Mail size={14} />
-                  <span>saisampathc2@gmail.com</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                  <MapPin size={14} />
-                  <span>Naperville, Illinois, USA</span>
-                </div>
-              </div>
-              
-              <button className="mt-6 flex items-center gap-2 px-4 py-2 bg-[#00ffd5] text-black rounded-lg hover:bg-opacity-90 transition-all">
-  <a
-    href="https://res.cloudinary.com/dmleutllp/image/upload/v1738710600/Sai_Sampath_CV_5_uaxlx3.pdf"
-    download="Sai_Sampath_CV_5.pdf"  // The downloaded file will have this name
-    className="flex items-center gap-2"
-  >
-    <Download size={16} />
-    <span>Download CV</span>
-  </a>
-</button>
+      <main className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24 py-6 md:py-12">
+        <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12">
+          {/* Profile Card */}
+          <div className="w-full lg:w-[420px] lg:flex-shrink-0">
+            <div className="card lg:sticky lg:top-24">
+              <div className="flex flex-col items-center text-center">
+                <img
+                  src="https://res.cloudinary.com/dvzsmoule/image/upload/v1738963865/sai_image_bs4anu.jpg"
+                  alt="Profile"
+                  className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full mb-4 md:mb-6 border-4 border-[#2a2e32] shadow-lg"
+                />
+                <div className="space-y-2 md:space-y-3">
+                  <h1 className="text-lg md:text-xl font-bold">SAI SAMPATH C PUSULURI</h1>
+                  <p className="text-base md:text-lg text-white">DevOps | Cloud Engineer</p>
+                  
+                  {/* Social Links */}
+                  <div className="py-4 border-t border-b border-[#2a2e32] my-4">
+                    <div className="flex gap-4 md:gap-6 justify-center">
+                      {socialLinks.map(({ icon: Icon, href }, index) => (
+                        <a
+                          key={index}
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="relative social-icon social-icon-hover bg-white rounded-full w-12 h-12 flex items-center justify-center transition-all hover:shadow-lg"
+                        >
+                          <Icon 
+                            size={24} 
+                            className="text-[#3f345f] hover:text-[#3086ff] transition-colors"
+                          />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
 
-
-              {/* Social Links */}
-              <div className="mt-6 flex gap-4 justify-center">
-                {socialLinks.map(({ icon: Icon, href }, index) => (
+                  {/* Contact Information */}
+                  <div className="flex items-center gap-2 text-sm md:text-base text-gray-400">
+                    <Phone size={16} />
+                    <span>+1 6502604477</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm md:text-base text-gray-400">
+                    <Mail size={16} />
+                    <a 
+                      href="mailto:saisampathc2@gmail.com"
+                      className="hover:text-[#3086ff] transition-colors"
+                    >
+                      saisampathc2@gmail.com
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm md:text-base text-gray-400">
+                    <MapPin size={16} />
+                    <span>Naperville, Illinois</span>
+                    <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_the_U.S..svg/768px-Flag_of_the_U.S..svg.png?20221027022216"
+                      srcSet="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_the_U.S..svg/768px-Flag_of_the_U.S..svg.png?20221027022216"
+                      alt="USA"
+                      className="w-5 h-3 inline-block ml-1"
+                    />
+                  </div>
+                </div>
+                
+                <button 
+                  className="mt-6 md:mt-8 flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 text-white rounded-lg hover:opacity-90 transition-all"
+                  style={{ backgroundImage: "linear-gradient(142.17deg, #3086ff 6.66%, #304cfd 91.48%)" }}
+                >
                   <a
-                    key={index}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#00ffd5] transition-colors"
+                    href="https://res.cloudinary.com/dmleutllp/image/upload/v1738710600/Sai_Sampath_CV_5_uaxlx3.pdf"
+                    download="Sai_Sampath_CV_5.pdf"
+                    className="flex items-center gap-2"
                   >
-                    <Icon size={20} />
+                    <Download size={16} />
+                    <span>Download CV</span>
                   </a>
-                ))}
+                </button>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Content Area */}
-        <div className="flex-1">
-          <div className="card">
-            {renderContent()}
+          {/* Content Area */}
+          <div className="flex-1">
+            <div className="card">
+              {renderContent()}
+            </div>
           </div>
         </div>
       </main>
